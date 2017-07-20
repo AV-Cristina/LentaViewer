@@ -6,12 +6,12 @@ package com.course.innopolis.lentaviewer;
 
 public class News {
     private String guid;
-    private String title;  //
+    private String title;
     private String link;
-    private String description; //
-    private String pubDate;     //
+    private String description;
+    private String pubDate;
     private String enclosurejpg;
-    private String category;     //
+    private String category;
 
     public News() {
     }
