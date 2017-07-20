@@ -1,7 +1,9 @@
-package com.course.innopolis.lentaviewer;
+package com.course.innopolis.lentaviewer.utils;
 
 import android.util.Log;
 import android.util.Xml;
+
+import com.course.innopolis.lentaviewer.models.News;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -17,7 +19,7 @@ import java.util.List;
 
 public class NewsXmlParser {
 
-    final static String LOG_TAG = "myParseLogs";
+    final static String LOG_TAG = "NewsParserLogs ";
 
     public List<News> parse(InputStream in) throws XmlPullParserException, IOException {
         try {
@@ -53,7 +55,6 @@ public class NewsXmlParser {
 
                     else if (parser.getName().equals("pubDate")) {
                         String pubDate = parser.nextText();
-                        //String d = pubDate.substring(0, pubDate.length()-6);
                         news.setPubDate(pubDate.substring(0, pubDate.length()-6));
                         Log.d(LOG_TAG, "pubDate = " + news.getPubDate());
                     }

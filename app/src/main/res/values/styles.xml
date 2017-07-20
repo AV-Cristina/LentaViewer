@@ -16,8 +16,6 @@
 
     <style name="Theme.Material.Sb.Green">
         <item name="colorPrimaryDark">@color/colorPrimaryDarkSb</item>
-
     </style>
-
 
 </resources>

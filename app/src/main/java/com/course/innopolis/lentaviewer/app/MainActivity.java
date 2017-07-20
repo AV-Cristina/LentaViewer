@@ -1,11 +1,17 @@
-package com.course.innopolis.lentaviewer;
+package com.course.innopolis.lentaviewer.app;
 
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+
+import com.course.innopolis.lentaviewer.adapters.NewsAdapter;
+import com.course.innopolis.lentaviewer.R;
+import com.course.innopolis.lentaviewer.models.News;
+import com.course.innopolis.lentaviewer.utils.XmlLoader;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -14,24 +20,22 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
-
     private static final String URL = "https://lenta.ru/rss";
 
-    // listView для отображения списка новостей
-    private ListView listView;
-
-    // адаптер для кастомизированного списка объектов News
-    private NewsListAdapter newsListAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // создание listView для отображения списка
-        listView = (ListView) findViewById(R.id.listView);
-        // создание адаптера
-        newsListAdapter = new NewsListAdapter(this);
-        // используется AsyncTask, чтобы загрузить XML и вывести список новостей
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.news_recycler_view);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         new DownloadXmlTask().execute(URL);
     }
 
@@ -60,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(List<News> currencyList) {
+        protected void onPostExecute(List<News> newsList1) {
             // вывод загруженного из xml-файла списка
-            newsListAdapter = new NewsListAdapter(MainActivity.this, currencyList);
-            listView.setAdapter(newsListAdapter);
+            mAdapter = new NewsAdapter(MainActivity.this, newsList1);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 }

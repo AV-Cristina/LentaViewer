@@ -1,4 +1,4 @@
-package com.course.innopolis.lentaviewer;
+package com.course.innopolis.lentaviewer.models;
 
 /**
  * Created by Cristina on 20.07.2017.

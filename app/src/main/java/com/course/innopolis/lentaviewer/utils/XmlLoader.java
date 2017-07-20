@@ -1,4 +1,6 @@
-package com.course.innopolis.lentaviewer;
+package com.course.innopolis.lentaviewer.utils;
+
+import com.course.innopolis.lentaviewer.models.News;
 
 import org.xmlpull.v1.XmlPullParserException;
 
