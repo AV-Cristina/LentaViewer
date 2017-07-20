@@ -52,12 +52,13 @@ public class NewsXmlParser {
                     }
 
                     else if (parser.getName().equals("pubDate")) {
-                        news.setPubDate(parser.nextText());
+                        String pubDate = parser.nextText();
+                        //String d = pubDate.substring(0, pubDate.length()-6);
+                        news.setPubDate(pubDate.substring(0, pubDate.length()-6));
                         Log.d(LOG_TAG, "pubDate = " + news.getPubDate());
                     }
 
                     else if (parser.getName().equals("category")) {
-                        //String value = parser.nextText().replace(",", ".");
                         news.setCategory(parser.nextText());
                         newsList.add(news);
                         Log.d(LOG_TAG, "category = " + news.getCategory());
