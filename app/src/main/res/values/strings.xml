@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Лента новостей</string>
+    <string name="news_pubDate">Дата публикации</string>
+    <string name="news_category">Категория</string>
+    <string name="news_title">Заголовок</string>
+
+</resources>
