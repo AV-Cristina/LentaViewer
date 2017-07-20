@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements OnListItemCallbac
     // Просмотреть новость подробнее
     @Override
     public void onClick(News news) {
-        Toast.makeText(this, "Selected " + news.getTitle(), Toast.LENGTH_LONG).show();
-        //Intent intent = new Intent();
-        //startActivity(intent);
+        Intent intent = new Intent(this, NewsDetailsActivity.class);
+        intent.putExtra(News.class.getCanonicalName(), news);
+        startActivity(intent);
     }
 
 

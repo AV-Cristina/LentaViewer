@@ -49,10 +49,6 @@ public class NewsXmlParser {
 
                 else if (news != null){
                     switch (parser.getName()) {
-                        case "link":
-                            news.setLink(parser.nextText());
-                            Log.d(LOG_TAG, "link = " + news.getLink());
-                            break;
                         case "description":
                             news.setDescription(parser.nextText());
                             Log.d(LOG_TAG, "description = " + news.getDescription());
@@ -63,7 +59,7 @@ public class NewsXmlParser {
                             Log.d(LOG_TAG, "pubDate = " + news.getPubDate());
                             break;
                         case "enclosure":
-                            news.setEnclosurejpg(parser.nextText());
+                            news.setEnclosurejpg(parser.getAttributeValue(null, "url"));
                             Log.d(LOG_TAG, "enclosure = " + news.getEnclosurejpg());
                             break;
                         case "category":

@@ -1,13 +1,15 @@
 package com.course.innopolis.lentaviewer.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Cristina on 20.07.2017.
  */
 
-public class News {
-    private String guid;
+public class News implements Parcelable{
+
     private String title;
-    private String link;
     private String description;
     private String pubDate;
     private String enclosurejpg;
@@ -16,22 +18,45 @@ public class News {
     public News() {
     }
 
-    public News(String guid, String title, String link, String description, String pubDate, String enclosurejpg, String category) {
-        this.guid = guid;
+    public News(String title, String description, String pubDate, String enclosurejpg, String category) {
         this.title = title;
-        this.link = link;
         this.description = description;
         this.pubDate = pubDate;
         this.enclosurejpg = enclosurejpg;
         this.category = category;
     }
 
-    public String getGuid() {
-        return guid;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setGuid(String guid) {
-        this.guid = guid;
+    // Упаковка объекта в Parcel
+    public void writeToParcel(Parcel parcel, int flag){
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeString(pubDate);
+        parcel.writeString(enclosurejpg);
+        parcel.writeString(category);
+    }
+
+    // Creator необходим, чтобы создавать новые объекты или массивы объектов
+    public static final Parcelable.Creator<News> CREATOR = new Parcelable.Creator<News>() {
+        public News createFromParcel(Parcel in) {
+            return new News(in);
+        }
+        public News[] newArray(int size) {
+            return new News[size];
+        }
+    };
+
+    // Конструктор, считывающий данные из Parcel
+    private News(Parcel parcel){
+        title = parcel.readString();
+        description = parcel.readString();
+        pubDate = parcel.readString();
+        enclosurejpg = parcel.readString();
+        category = parcel.readString();
     }
 
     public String getTitle() {
@@ -40,14 +65,6 @@ public class News {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 
     public String getDescription() {
