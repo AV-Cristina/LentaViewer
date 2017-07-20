@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.course.innopolis.lentaviewer.R;
+import com.course.innopolis.lentaviewer.app.OnListItemCallback;
 import com.course.innopolis.lentaviewer.models.News;
 
 import java.util.List;
@@ -23,19 +24,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
     private String TAG = "RecyclerView ";
     private List<News> mNewsList;
     private LayoutInflater mInflater;
+    private OnListItemCallback callback;
 
-    public NewsAdapter(Context context, List<News> mNewsList) {
+    public NewsAdapter(Context context, List<News> mNewsList, OnListItemCallback callback) {
         this.mNewsList = mNewsList;
         this.mInflater = LayoutInflater.from(context);
+        this.callback = callback;
     }
+
 
     @Override
     public NewsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.d(TAG, "onCreateViewHolder");
         View view = mInflater.inflate(R.layout.news_item, parent, false);
-        NewsHolder holder = new NewsHolder(view);
+        NewsHolder holder = new NewsHolder(view, callback);
         return holder;
     }
+
 
     @Override
     public void onBindViewHolder(NewsHolder holder, int position) {
@@ -43,22 +48,29 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
         holder.setData(currentNews, position);
     }
 
+
     @Override
     public int getItemCount() {
         return mNewsList.size();
     }
 
-    class NewsHolder extends RecyclerView.ViewHolder{
+
+    class NewsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView pubDate, category, title;
         int position;
         News current;
+        private OnListItemCallback callback;
 
-        public NewsHolder(View itemView) {
+
+        public NewsHolder(View itemView, OnListItemCallback callback) {
             super(itemView);
             pubDate = (TextView)itemView.findViewById(R.id.news_pubDate);
             category = (TextView)itemView.findViewById(R.id.news_category);
             title = (TextView)itemView.findViewById(R.id.news_title);
+            this.callback= callback;
+            itemView.setOnClickListener(this);
         }
+
 
         public void setData(News current, int position) {
             this.pubDate.setText(current.getPubDate());
@@ -67,6 +79,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder>{
             this.position = position;
             this.current = current;
         }
-    }
 
+
+        @Override
+        public void onClick(View v) {
+            callback.onClick(current);
+        }
+    }
 }

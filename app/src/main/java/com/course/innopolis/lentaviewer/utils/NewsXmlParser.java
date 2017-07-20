@@ -32,7 +32,7 @@ public class NewsXmlParser {
         }
     }
 
-    // парсим xml файл в список объектов News
+    // Парсим xml файл в список объектов News
     private static List<News> readNewsList(XmlPullParser parser) throws XmlPullParserException, IOException {
         List<News> newsList = new ArrayList();
         News news = null;
@@ -48,21 +48,29 @@ public class NewsXmlParser {
                 }
 
                 else if (news != null){
-                    if (parser.getName().equals("link")) {
-                        news.setLink(parser.nextText());
-                        Log.d(LOG_TAG, "link = " + news.getLink());
-                    }
-
-                    else if (parser.getName().equals("pubDate")) {
-                        String pubDate = parser.nextText();
-                        news.setPubDate(pubDate.substring(0, pubDate.length()-6));
-                        Log.d(LOG_TAG, "pubDate = " + news.getPubDate());
-                    }
-
-                    else if (parser.getName().equals("category")) {
-                        news.setCategory(parser.nextText());
-                        newsList.add(news);
-                        Log.d(LOG_TAG, "category = " + news.getCategory());
+                    switch (parser.getName()) {
+                        case "link":
+                            news.setLink(parser.nextText());
+                            Log.d(LOG_TAG, "link = " + news.getLink());
+                            break;
+                        case "description":
+                            news.setDescription(parser.nextText());
+                            Log.d(LOG_TAG, "description = " + news.getDescription());
+                            break;
+                        case "pubDate":
+                            String pubDate = parser.nextText();
+                            news.setPubDate(pubDate.substring(0, pubDate.length() - 6));
+                            Log.d(LOG_TAG, "pubDate = " + news.getPubDate());
+                            break;
+                        case "enclosure":
+                            news.setEnclosurejpg(parser.nextText());
+                            Log.d(LOG_TAG, "enclosure = " + news.getEnclosurejpg());
+                            break;
+                        case "category":
+                            news.setCategory(parser.nextText());
+                            newsList.add(news);
+                            Log.d(LOG_TAG, "category = " + news.getCategory());
+                            break;
                     }
                 }
             }
