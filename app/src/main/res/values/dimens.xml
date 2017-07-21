@@ -2,4 +2,5 @@
 <resources>
     <dimen name="view_margin">8dp</dimen>
     <dimen name="view_item_margin">6dp</dimen>
+    <dimen name="image_size">100dp</dimen>
 </resources>

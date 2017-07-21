@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity implements OnListItemCallbac
         }
 
 
+        // Вывод загруженного из xml-файла списка
         @Override
         protected void onPostExecute(List<News> newsList) {
-            // вывод загруженного из xml-файла списка
             mAdapter = new NewsAdapter(MainActivity.this, newsList, MainActivity.this);
             mRecyclerView.setAdapter(mAdapter);
         }

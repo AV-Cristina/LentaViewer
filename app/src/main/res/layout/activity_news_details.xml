@@ -15,7 +15,6 @@
         android:id="@+id/news_pubDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_item_margin"
         android:text="@string/news_pubDate" />
         />
 
@@ -23,11 +22,15 @@
         android:id="@+id/news_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_item_margin"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/view_item_margin"
         android:textAppearance="@style/TextAppearance.Sb"/>
 
     <ImageView
         android:id="@+id/news_photo"
+        android:maxWidth="@dimen/image_size"
+        android:maxHeight="@dimen/image_size"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -35,7 +38,6 @@
         android:id="@+id/news_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_item_margin"
         android:inputType="textMultiLine" />
 
 
